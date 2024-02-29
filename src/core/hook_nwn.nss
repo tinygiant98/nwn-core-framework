@@ -11,7 +11,6 @@
 ///     this script set as their event handler.
 /// ----------------------------------------------------------------------------
 
-#include "x2_inc_switches"
 #include "util_i_varlists"
 #include "core_i_framework"
 
@@ -358,15 +357,6 @@ void OnUserDefined()
 
 void OnModuleLoad()
 {
-    // Set the spellhook event
-    SetModuleOverrideSpellscript(CORE_HOOK_SPELLS);
-
-    // If we're using the core's tagbased scripting, disable X2's version to
-    // avoid conflicts with OnSpellCastAt; it will be handled by the spellhook.
-    if (ENABLE_TAGBASED_SCRIPTS)
-        SetModuleSwitch(MODULE_SWITCH_ENABLE_TAGBASED_SCRIPTS, FALSE);
-
-    // Run our module load event
     RunEvent(MODULE_EVENT_ON_MODULE_LOAD);
 }
 
@@ -469,9 +459,8 @@ void OnActivateItem()
 
     if (ENABLE_TAGBASED_SCRIPTS && !(nState & EVENT_STATE_DENIED))
     {
-        string sTag = GetTag(oItem);
-        SetUserDefinedItemEventNumber(X2_ITEM_EVENT_ACTIVATE);
-        RunLibraryScript(sTag);
+        SetItemEvent(ITEM_EVENT_ON_ACTIVATE);
+        RunLibraryScript(GetTag(oItem));
     }
 }
 
@@ -483,9 +472,8 @@ void OnAcquireItem()
 
     if (ENABLE_TAGBASED_SCRIPTS && !(nState & EVENT_STATE_DENIED))
     {
-        string sTag = GetTag(oItem);
-        SetUserDefinedItemEventNumber(X2_ITEM_EVENT_ACQUIRE);
-        RunLibraryScript(sTag);
+        SetItemEvent(ITEM_EVENT_ON_ACQUIRE);
+        RunLibraryScript(GetTag(oItem));
     }
 }
 
@@ -497,9 +485,8 @@ void OnUnAcquireItem()
 
     if (ENABLE_TAGBASED_SCRIPTS && !(nState & EVENT_STATE_DENIED))
     {
-        string sTag = GetTag(oItem);
-        SetUserDefinedItemEventNumber(X2_ITEM_EVENT_UNACQUIRE);
-        RunLibraryScript(sTag);
+        SetItemEvent(ITEM_EVENT_ON_UNACQUIRE);
+        RunLibraryScript(GetTag(oItem));
     }
 }
 
@@ -583,9 +570,8 @@ void OnPlayerEquipItem()
 
     if (ENABLE_TAGBASED_SCRIPTS && !(nState & EVENT_STATE_DENIED))
     {
-        string sTag = GetTag(oItem);
-        SetUserDefinedItemEventNumber(X2_ITEM_EVENT_EQUIP);
-        RunLibraryScript(sTag);
+        SetItemEvent(ITEM_EVENT_ON_EQUIP);
+        RunLibraryScript(GetTag(oItem));
     }
 }
 
@@ -597,9 +583,8 @@ void OnPlayerUnEquipItem()
 
     if (ENABLE_TAGBASED_SCRIPTS && !(nState & EVENT_STATE_DENIED))
     {
-        string sTag = GetTag(oItem);
-        SetUserDefinedItemEventNumber(X2_ITEM_EVENT_UNEQUIP);
-        RunLibraryScript(sTag);
+        SetItemEvent(ITEM_EVENT_ON_UNEQUIP);
+        RunLibraryScript(GetTag(oItem));
     }
 }
 

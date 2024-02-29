@@ -5,7 +5,6 @@
 /// ----------------------------------------------------------------------------
 
 #include "core_i_framework"
-#include "x2_inc_switches"
 
 void main()
 {
@@ -13,7 +12,7 @@ void main()
 
     // The DENIED state stops the spell from executing
     if (nState & EVENT_STATE_DENIED)
-        SetModuleOverrideSpellScriptFinished();
+        BlockLastSpell();
     else
     {
         // Handle the special case of casting a spell at an item
@@ -22,7 +21,7 @@ void main()
         if (GetObjectType(oItem) == OBJECT_TYPE_ITEM)
         {
             string sTag = GetTag(oItem);
-            SetUserDefinedItemEventNumber(X2_ITEM_EVENT_SPELLCAST_AT);
+            SetItemEvent(ITEM_EVENT_ON_SPELL_CAST_AT);
             RunLibraryScript(sTag);
         }
     }

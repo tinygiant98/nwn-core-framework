@@ -294,6 +294,12 @@ void InitializeCoreFramework()
     if (AUTO_HOOK_MODULE_EVENTS)
         HookObjectEvents(oModule, FALSE);
 
+    if (CORE_HOOK_SPELLS != "")
+        SetLocalString(oModule, "X2_S_UD_SPELLSCRIPT", CORE_HOOK_SPELLS);
+
+    if (ENABLE_TAGBASED_SCRIPTS)
+        SetLocalInt(oModule, "X2_SWITCH_ENABLE_TAGBASED_SCRIPTS", FALSE);
+
     if (AUTO_HOOK_AREA_EVENTS || AUTO_HOOK_OBJECT_EVENTS)
     {
         object oArea = GetFirstArea();
@@ -782,6 +788,16 @@ int RunItemEvent(string sEvent, object oItem, object oPC)
     if (!(nStatus & EVENT_STATE_DENIED))
         nStatus |= RunEvent(sEvent, oPC, oItem, TRUE);
     return nStatus;
+}
+
+void SetItemEvent(int nEvent, object oItem = OBJECT_SELF)
+{
+    SetLocalInt(oItem, "X2_L_LAST_ITEM_EVENT", nEvent);
+}
+
+void BlockLastSpell()
+{
+    SetLocalInt(OBJECT_SELF, "X2_L_BLOCK_LAST_SPELL", TRUE);
 }
 
 string GetEventName(int nEvent)

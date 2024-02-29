@@ -235,6 +235,16 @@ const string PLACEABLE_EVENT_ON_UNLOCK                = "OnPlaceableUnLock";
 const string PLACEABLE_EVENT_ON_USED                  = "OnPlaceableUsed";
 const string PLACEABLE_EVENT_ON_USER_DEFINED          = "OnPlaceableUserDefined";
 
+// ----- Item Events -----------------------------------------------------------
+
+const int ITEM_EVENT_ON_ACTIVATE                      = 0;
+const int ITEM_EVENT_ON_EQUIP                         = 1;
+const int ITEM_EVENT_ON_UNEQUIP                       = 2;
+const int ITEM_EVENT_ON_HIT_CAST                      = 3;
+const int ITEM_EVENT_ON_ACQUIRE                       = 4;
+const int ITEM_EVENT_ON_UNACQUIRE                     = 5;
+const int ITEM_EVENT_ON_SPELL_CAST_AT                 = 6;
+
 // ----- Store Events ----------------------------------------------------------
 
 const string STORE_EVENT_ON_OPEN                      = "OnStoreOpen";
